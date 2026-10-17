@@ -15,24 +15,21 @@ public class ChildActivityClassController {
 
     @Autowired
     private ChildActivityClassRepository repository;
+    @GetMapping("/")
+    public String home() {
+        return "Welcome to Child Activity Class API";
+    }
 
     @PostMapping("/add")
     public ChildActivityClass addActivity(
             @RequestBody ChildActivityClass activity) {
         return repository.save(activity);
     } 
-    @GetMapping("/all")
+    @GetMapping("/displayall")
     public List<ChildActivityClass> getAllActivities() {
         return repository.findAll();
     }
-    @PutMapping("/update/{id}")
-    public ChildActivityClass updateActivity(
-            @PathVariable Long id,
-            @RequestBody ChildActivityClass activity) {
-
-        activity.setId(id);
-        return repository.save(activity);
-    }
+   
     @DeleteMapping("/delete/{id}")
     public String deleteActivity(@PathVariable Long id) {
         repository.deleteById(id);
